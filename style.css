@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Racing Checkered Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(45deg, #ff6b00 25%, transparent 25%),
+        linear-gradient(-45deg, #ff6b00 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ff6b00 75%),
+        linear-gradient(-45deg, transparent 75%, #ff6b00 75%);
+    background-size: 60px 60px;
+    background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Speed lines animation */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 107, 0, 0.03) 2px,
+        rgba(255, 107, 0, 0.03) 4px
+    );
+    animation: speedLines 3s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes speedLines {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100px);
+    }
+}
+
+/* Index Page Styles */
+#welcome-container {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(26, 26, 46, 0.85) 100%);
+    padding: 60px 40px;
+    border-radius: 10px;
+    border: 3px solid #ff6b00;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.4), inset 0 0 40px rgba(255, 107, 0, 0.05);
+    backdrop-filter: blur(10px);
+    animation: slideInDown 0.6s ease-out, racingGlow 2s ease-in-out infinite;
+    max-width: 550px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+#welcome-container h1 {
+    color: #ff6b00;
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.6), 0 0 40px rgba(255, 107, 0, 0.3);
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#welcome-container p {
+    color: #ddd;
+    font-size: 1.15em;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+@keyframes racingGlow {
+    0%, 100% {
+        box-shadow: 0 0 40px rgba(255, 107, 0, 0.4), inset 0 0 40px rgba(255, 107, 0, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 60px rgba(255, 107, 0, 0.6), inset 0 0 60px rgba(255, 107, 0, 0.1);
+    }
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid #ff6b00;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(255, 107, 0, 0.6);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #ff6b00;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 107, 0, 0.15);
+    color: #ff8533;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(255, 107, 0, 0.5);
+}
+
+/* Form Styles */
+form {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(26, 26, 46, 0.85) 100%);
+    padding: 50px 40px;
+    border-radius: 10px;
+    border: 3px solid #ff6b00;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.4), inset 0 0 40px rgba(255, 107, 0, 0.05);
+    max-width: 450px;
+    width: 100%;
+    animation: slideInUp 0.6s ease-out, racingGlow 2s ease-in-out infinite;
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+}
+
+form h1, form h2 {
+    color: #ff6b00;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+form h3 {
+    color: #aaa;
+    font-size: 0.95em;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: 400;
+}
+
+form h3 a {
+    color: #ff6b00;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
+}
+
+form h3 a:hover {
+    color: #ff8533;
+    text-decoration: underline;
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+}
+
+label {
+    display: block;
+    color: #ddd;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ff6b00;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder {
+    color: #888;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #ff8533;
+    background: rgba(255, 107, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.3), inset 0 0 10px rgba(255, 107, 0, 0.1);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+    color: white;
+    border: 2px solid #ff6b00;
+    border-radius: 5px;
+    font-size: 1.05em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 107, 0, 0.6);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Animations */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 40px 25px;
+    }
+
+    #welcome-container {
+        padding: 40px 25px;
+    }
+
+    #welcome-container h1 {
+        font-size: 2.2em;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        font-size: 1em;
+    }
+
+    form h1, form h2 {
+        font-size: 1.7em;
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 30px 20px;
+    }
+
+    #welcome-container {
+        padding: 30px 20px;
+    }
+
+    #welcome-container h1 {
+        font-size: 1.8em;
+    }
+
+    label {
+        font-size: 0.9em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"] {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+}
